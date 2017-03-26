@@ -9,6 +9,6 @@ RUN set -x \
 
 ENV PG_MAJOR 9.5
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update && apt-get install -y postgresql-client-$PG_MAJOR && rm -rf /var/lib/apt/lists/*
