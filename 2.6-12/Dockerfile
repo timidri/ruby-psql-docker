@@ -9,6 +9,6 @@ RUN set -x \
 
 ENV PG_MAJOR 12
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
 
-RUN apt-get update && apt-get install -y postgresql-client-$PG_MAJOR && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y postgresql-client-$PG_MAJOR && rm -rf /root/* && rm -rf /tmp/* && rm -rf /var/cache/apt/archives/*.deb && rm -rf /var/lib/apt/lists/*
