@@ -30,6 +30,16 @@ jobs:
         tags: easyredir/ruby-psql:2.6-13
         cache-from: type=registry,ref=user/app:latest
         cache-to: type=inline
+    - name: Build and push Ruby 2.6 with PostgreSQL 14 client
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./2.6-14/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: easyredir/ruby-psql:2.6-14
+        cache-from: type=registry,ref=user/app:latest
+        cache-to: type=inline
     - name: Build and push Ruby 2.7 with PostgreSQL 13 client
       uses: docker/build-push-action@v2
       with:
@@ -48,5 +58,15 @@ jobs:
         platforms: linux/amd64,linux/arm64
         push: true
         tags: easyredir/ruby-psql:3.0-13
+        cache-from: type=registry,ref=user/app:latest
+        cache-to: type=inline
+    - name: Build and push Ruby 3.1 with PostgreSQL 14 client
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./3.1-14/Dockerfile
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: easyredir/ruby-psql:3.1-14
         cache-from: type=registry,ref=user/app:latest
         cache-to: type=inline
