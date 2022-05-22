@@ -1,14 +1,14 @@
 FROM easyredir/ruby:2.7
 
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN set -x \
-	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-	&& wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-	&& apt-get purge -y --auto-remove wget
-
 ENV PG_MAJOR 13
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN curl -sS https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /usr/share/keyrings/postgresql.gpg
+RUN sh -c 'echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/postgresql.list'
 
-RUN apt-get update && apt-get install -y postgresql-client-$PG_MAJOR && rm -rf /root/* && rm -rf /tmp/* && rm -rf /var/cache/apt/archives/*.deb && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+	&& apt-get install -y postgresql-client-$PG_MAJOR \
+	&& rm -rf /root/* \
+	&& rm -rf /tmp/* \
+	&& rm -rf /var/cache/apt/archives/*.deb \
+	&& rm -rf /var/lib/apt/lists/*
