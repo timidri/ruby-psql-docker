@@ -12,3 +12,5 @@ RUN apt-get update \
 	&& rm -rf /tmp/* \
 	&& rm -rf /var/cache/apt/archives/*.deb \
 	&& rm -rf /var/lib/apt/lists/*
+
+RUN gem install pg
